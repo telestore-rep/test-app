@@ -1,0 +1,10 @@
+:root {
+  --color-base-dark: #000000;
+  --color-base-light: #ffffff;
+  --color-muted: #878787;
+  --color-secondary-dark: #3d3d3d;
+  --color-secondary-light: #dbdbdb;
+
+  /* --color-muted: #eeeeee;
+  --color-muted: #787878; */
+}

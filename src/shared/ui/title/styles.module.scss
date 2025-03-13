@@ -1,0 +1,13 @@
+.TitleBlock {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 3px;
+    border-bottom: 1px dashed #000;
+
+    &Dark {
+        border-bottom: 1px dashed #878787;
+    }
+}

@@ -1,0 +1,88 @@
+# Docker
+# Build a Docker image
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- dev
+
+resources:
+  repositories:
+    - repository: myRepo1
+      type: git
+      name: /tele.store/_git/tele.store.testapp
+
+variables:
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      name: default
+    steps:
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        command: buildAndPush
+        containerRegistry: registry.itbuildgroup.ru
+        repository: $(Build.DefinitionName)
+        buildContext: $(System.DefaultWorkingDirectory)/
+        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+        tags: |
+          $(tag)
+- stage: Deploy
+  displayName: Deploy image
+  jobs:
+  - deployment: Runimages
+    environment:
+      name: dev-tele-store
+      resourceType: VirtualMachine
+      resourceName: dev-tele-store01
+    strategy:
+      # Default deployment strategy, more coming...
+      runOnce:
+        deploy:
+          steps:
+          - checkout: myRepo1 
+          - task: Docker@0
+            displayName: 'Docker stop'
+            inputs:
+              containerregistrytype: 'Container Registry'
+              dockerRegistryConnection: 'registry.itbuildgroup.ru'
+              action: 'Run a Docker command'
+              customCommand: 'stop $(Build.DefinitionName)'
+            continueOnError: true
+          - task: Docker@0
+            displayName: 'Docker rm'
+            inputs:
+              containerregistrytype: 'Container Registry'
+              dockerRegistryConnection: 'registry.itbuildgroup.ru'
+              action: 'Run a Docker command'
+              customCommand: 'rm $(Build.DefinitionName)'
+            continueOnError: true
+
+          - task: Docker@0
+            displayName: 'Docker remove unused images'
+            inputs:
+              containerregistrytype: 'Container Registry'
+              dockerRegistryConnection: 'registry.itbuildgroup.ru'
+              action: 'Run a Docker command'
+              customCommand: 'image prune -af'
+            continueOnError: true          
+          - task: Docker@0
+            displayName: 'Run a Docker command'
+            inputs:
+              containerregistrytype: 'Container Registry'
+              dockerRegistryConnection: 'registry.itbuildgroup.ru'
+              action: 'Run a Docker command'
+              customCommand: 'create -e ASPNETCORE_ENVIRONMENT=Development --name $(Build.DefinitionName) -p 8086:3000 --add-host="dev.tele.store:10.7.13.32" --restart always registry.itbuildgroup.ru:5000/$(Build.DefinitionName):$(tag)'
+
+
+          - task: Docker@0
+            displayName: 'Docker start'
+            inputs:
+              action: 'Run a Docker command'
+              customCommand: 'start $(Build.DefinitionName)'

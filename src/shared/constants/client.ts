@@ -1,0 +1,6 @@
+"use client";
+
+export const API_URL = "https://dev.tele.store:8081";
+export const APP_URL_ID = 1740742094035316;
+export const APP_ID = 1739197350166203;
+export const PUBLIC_USER_KEY = "2D608347008C53AE12DD3AD5EB79C2B36A3BB07D9F1C8AC7C2AA537DF30932CC";

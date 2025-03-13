@@ -1,0 +1,10 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  /* background: rgb(65, 79, 129); */
+  background: #000;
+  /* background: #fff; */
+  margin: 0;
+}

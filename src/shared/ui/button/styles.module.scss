@@ -1,0 +1,40 @@
+.Button {
+  padding: 5px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 400;
+  outline: none;
+  min-height: 30px;
+  color: #000000;
+  border: 1px solid #000000;
+  background-color: #fff;
+  transition: 0.3s ease-in-out;
+
+  &:active {
+    background-color: #878787;
+  }
+
+  &[data-bg="black"] {
+    background-color: #000000;
+    color: #ffffff;
+  }
+
+  &[data-bg="inactive"] {
+    --bg-color: #878787;
+  }
+  &[data-size="sm"] {
+    width: 130px;
+  }
+
+  &[data-size="md"] {
+    width: 180px;
+  }
+}
+
+.Button:disabled {
+  cursor: not-allowed;
+  background-color: #878787;
+  border: none;
+  color: #3d3d3d;
+}

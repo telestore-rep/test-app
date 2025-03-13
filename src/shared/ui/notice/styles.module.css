@@ -1,0 +1,11 @@
+.Notice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 61px;
+  height: 30px;
+  border: 1px solid #787878;
+  background: #bcbcbc;
+  border-radius: 10px;
+  color: #787878;
+}

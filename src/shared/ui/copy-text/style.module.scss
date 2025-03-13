@@ -1,0 +1,33 @@
+.CopyText {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #fff;
+  height: 11px;
+  position: relative;
+
+  &-dark {
+    color: #fff;
+  }
+
+  &-light {
+    color: #000;
+  }
+}
+
+.Copied {
+  position: absolute;
+  right: 0;
+}
+
+.CopyIcon {
+  margin-left: 20px;
+}
+
+.CopyIcon:hover {
+  opacity: 0.7;
+}
+
+.label {
+  font-size: 12px;
+}
