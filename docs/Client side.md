@@ -28,7 +28,7 @@ https://web.tele.store/redirect_ext_auth.html?get_user_info=${APP_URL_ID}
 Where:
 - `APP_URL_ID` is the URL identifier of your application registered in TeleStore (Profile -> Security -> App URL's).
 
-[User Redirection Example](https://github.com/telestore-rep/test-app/blob/ff743c7db872b19f9ac69f32fabdf2c59dd6f737/src/app/client/page.tsx#L152)
+[User Redirection Example](../src/app/client/page.tsx#L152)
 
 After retrieving the data, TeleStore redirects the user back to your application at the following URL:
 
@@ -89,13 +89,13 @@ If the signature is correct and the timestamp is not too old, then the developer
 
 You can validate the received data on your server by sending it from your client application and then performing the necessary validation steps.
 
-[Server-Side Validation Example](https://github.com/telestore-rep/test-app/blob/ff743c7db872b19f9ac69f32fabdf2c59dd6f737/src/app/api/validate_usr_info/route.ts#L21)
+[Server-Side Validation Example](../src/app/api/validate_usr_info/route.ts#L21)
 
 ### Client-Side Validation
 
 We do not recommend this validation method, as it requires storing your application's public key on the client side, which may reduce the security of your application.
 
-[Client-Side Validation Example](https://github.com/telestore-rep/test-app/blob/ff743c7db872b19f9ac69f32fabdf2c59dd6f737/src/app/client/page.tsx#L159)
+[Client-Side Validation Example](../src/app/client/page.tsx#L159)
 
 ## User Authorization via TeleStore (Client Session)
 
@@ -120,7 +120,7 @@ After successful authorization, the user is redirected to the following URL:
 
 Subsequently, the `auth_code` can be used to create a new session.
 
-[Redirect Authentication Example](https://github.com/telestore-rep/test-app/blob/ff743c7db872b19f9ac69f32fabdf2c59dd6f737/src/app/client/page.tsx#L200)
+[Redirect Authentication Example](../src/app/client/page.tsx#L200)
 
 ### Authorization via Popup
 
@@ -134,7 +134,7 @@ Where:
 - `APP_URL_ID` is the URL identifier of your application registered in TeleStore (Profile -> Security -> App URL's).
 - `popup=true` is a required parameter for successful authentication.
 
-[Popup Authentication Example](https://github.com/telestore-rep/test-app/blob/ff743c7db872b19f9ac69f32fabdf2c59dd6f737/src/app/client/page.tsx#L207)
+[Popup Authentication Example](../src/app/client/page.tsx#L207)
 
 ## Retrieving User Information
 
@@ -144,7 +144,7 @@ To retrieve user information, send an authorized request to:
 GET https://web.tele.store/appauth/v1/get_teleuser_details
 ```
 
-[User Data Retrieval Example](https://github.com/telestore-rep/test-app/blob/ff743c7db872b19f9ac69f32fabdf2c59dd6f737/src/app/client/page.tsx#L125)
+[User Data Retrieval Example](../src/app/client/page.tsx#L125)
 
 ## Retrieving User Balance
 
@@ -154,7 +154,7 @@ To retrieve the user's balance, send an authorized request to:
 GET https://web.tele.store/appauth/v1/get_balance
 ```
 
-[User Balance Retrieval Example](https://github.com/telestore-rep/test-app/blob/ff743c7db872b19f9ac69f32fabdf2c59dd6f737/src/app/client/page.tsx#L180)
+[User Balance Retrieval Example](../src/app/client/page.tsx#L180)
 
 ## Making a Transfer to the Developer Account
 
@@ -169,7 +169,7 @@ BODY {
 }
 ```
 
-[Transfer to Developer Account Example](https://github.com/telestore-rep/test-app/blob/ff743c7db872b19f9ac69f32fabdf2c59dd6f737/src/app/client/page.tsx#L232)
+[Transfer to Developer Account Example](../src/app/client/page.tsx#L232)
 
 ## Saving Application Data
 
@@ -182,7 +182,7 @@ BODY {
 }
 ```
 
-[Save Application Data Example](https://github.com/telestore-rep/test-app/blob/ff743c7db872b19f9ac69f32fabdf2c59dd6f737/src/app/client/page.tsx#L261)
+[Save Application Data Example](../src/app/client/page.tsx#L261)
 
 ## Retrieving Application Data
 
@@ -192,4 +192,4 @@ To retrieve application data, send an authorized request to:
 GET https://web.tele.store/appauth/v1/list_app_user_data
 ```
 
-[Retrieve Application Data Example](https://github.com/telestore-rep/test-app/blob/ff743c7db872b19f9ac69f32fabdf2c59dd6f737/src/app/client/page.tsx#L281)
+[Retrieve Application Data Example](../src/app/client/page.tsx#L281)

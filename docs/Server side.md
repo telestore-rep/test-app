@@ -21,7 +21,7 @@ For easier development, we recommend using the [official TeleStore SDK](https://
 
 To create a new session, you need to generate a new User Key in your TeleStore developer account (Profile -> Security -> User keys).
 
-[Example of session creation via SDK](https://github.com/telestore-rep/test-app/blob/ff743c7db872b19f9ac69f32fabdf2c59dd6f737/src/app/api/sdk_connect/route.ts#L7)
+[Example of session creation via SDK](../src/app/api/sdk_connect/route.ts#L7)
 
 ## Retrieving Account Information
 
@@ -31,7 +31,7 @@ To retrieve developer account information, send an authorized request to:
 GET https://web.tele.store/api/v1/teleuser_details
 ```
 
-[Example of retrieving account information](https://github.com/telestore-rep/test-app/blob/ff743c7db872b19f9ac69f32fabdf2c59dd6f737/src/app/api/teleuser_detailts/route.ts#L8)
+[Example of retrieving account information](../src/app/api/teleuser_detailts/route.ts#L8)
 
 ## Subscribing to SSE
 
@@ -58,7 +58,7 @@ esLink.onerror = (error: unknown) => {
 }
 ```
 
-[Example of SSE connection](https://github.com/telestore-rep/test-app/blob/ff743c7db872b19f9ac69f32fabdf2c59dd6f737/src/app/api/connect_sse/route.ts#L17)
+[Example of SSE connection](../src/app/api/connect_sse/route.ts#L17)
 
 ## Receiving Webhooks
 
@@ -68,7 +68,7 @@ To receive webhooks, add a new App URL (Profile -> Security -> Apps URLs), speci
 POST https://test.tele.store/webhook
 ```
 
-[Webhook example](https://github.com/telestore-rep/test-app/blob/ff743c7db872b19f9ac69f32fabdf2c59dd6f737/src/app/webhook/route.ts#L10)
+[Webhook example](../src/app/webhook/route.ts#L10)
 
 ## Retrieving Developer App List
 
@@ -78,7 +78,7 @@ To retrieve the developer's app list, send an authorized request to:
 GET https://web.tele.store/api/v1/dev_list_my_apps
 ```
 
-[Example of retrieving developer app list](https://github.com/telestore-rep/test-app/blob/ff743c7db872b19f9ac69f32fabdf2c59dd6f737/src/app/api/dev_list_apps/route.ts#L8)
+[Example of retrieving developer app list](../src/app/api/dev_list_apps/route.ts#L8)
 
 ## Retrieving Developer Balance Information
 
@@ -91,7 +91,7 @@ PARAMS {
 }
 ```
 
-[Example of retrieving developer balance information](https://github.com/telestore-rep/test-app/blob/ff743c7db872b19f9ac69f32fabdf2c59dd6f737/src/app/api/balance_info/route.ts#L8)
+[Example of retrieving developer balance information](../src/app/api/balance_info/route.ts#L8)
 
 ## Creating a Transfer to a TeleStore User
 
@@ -132,7 +132,7 @@ BODY {
 }
 ```
 
-[Example of creating a transfer to a TeleStore user](https://github.com/telestore-rep/test-app/blob/ff743c7db872b19f9ac69f32fabdf2c59dd6f737/src/app/server/page.tsx#L204)
+[Example of creating a transfer to a TeleStore user](../src/app/server/page.tsx#L204)
 
 ## Retrieving TeleStore Transaction History
 
@@ -150,11 +150,11 @@ PARAMS {
 }
 ```
 
-[Example of retrieving transaction history](https://github.com/telestore-rep/test-app/blob/ff743c7db872b19f9ac69f32fabdf2c59dd6f737/src/app/api/get_transactions/route.ts#L9)
+[Example of retrieving transaction history](../src/app/api/get_transactions/route.ts#L9)
 
 ## Creating an Invoice
 
-[Example of invoice creation via SDK](https://github.com/telestore-rep/test-app/blob/ff743c7db872b19f9ac69f32fabdf2c59dd6f737/src/app/server/page.tsx#L175)
+[Example of invoice creation via SDK](../src/app/server/page.tsx#L175)
 
 ## Retrieving Invoice List
 
@@ -167,4 +167,4 @@ PARAMS {
 }
 ```
 
-[Example of retrieving invoice list](https://github.com/telestore-rep/test-app/blob/ff743c7db872b19f9ac69f32fabdf2c59dd6f737/src/app/api/get_invoices/route.ts#L8)
+[Example of retrieving invoice list](../src/app/api/get_invoices/route.ts#L8)
