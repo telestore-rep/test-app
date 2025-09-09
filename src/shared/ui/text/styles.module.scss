@@ -1,0 +1,40 @@
+.Text {
+  font-family: "Inter";
+  margin: 0;
+
+  &-dark {
+    color: #ffffff;
+  }
+
+  &-light {
+    color: #000000;
+  }
+
+  &-grey {
+    color: #878787;
+  }
+
+  &[data-weight="regular"] {
+    font-weight: 400;
+  }
+
+  &[data-weight="medium"] {
+    font-weight: 500;
+  }
+
+  &[data-weight="semibold"] {
+    font-weight: 600;
+  }
+
+  &[data-weight="bold"] {
+    font-weight: 700;
+  }
+
+  &[data-weight="extrabold"] {
+    font-weight: 800;
+  }
+
+  &[data-weight="black"] {
+    font-weight: 900;
+  }
+}

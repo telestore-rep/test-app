@@ -1,0 +1,44 @@
+.DescriptionContainer {
+    color: white;
+    display: grid;
+    width: 100%;
+    justify-items: center;
+}
+
+.DescriptionContainerInfo {
+    color: yellow;
+}
+
+.Container {
+    display: grid;
+    justify-self: center;
+    grid-template-columns: 1fr 1fr;
+}
+
+.Button {
+    margin: 10px;
+    color: white;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 10px 20px;
+    background: transparent;
+    border: 3px solid white;
+    cursor: pointer;
+}
+
+.Input {
+    margin: 10px;
+    color: white;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 10px 20px;
+    background: transparent;
+    border: 3px solid white;
+}
+
+.SelectPageContainer {
+    gap: 10px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}

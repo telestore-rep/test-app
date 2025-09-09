@@ -1,0 +1,48 @@
+.InfoCard {
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #dbdbdb;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+
+  &Dark {
+    border: 1px solid #787878;
+
+    .InfoCardBody {
+      background: #3d3d3d;
+    }
+  }
+}
+
+.InfoCardBody {
+  width: 100%;
+}
+
+.Textarea {
+  width: 100%;
+  resize: none;
+  border-radius: 10px;
+  background: #dbdbdb;
+  box-sizing: border-box;
+  font-size: 10px;
+  font-family: "Inter";
+  font-weight: 500;
+  border: none;
+  padding: 10px;
+  outline: none;
+  min-height: 60px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &Dark {
+    background: #3d3d3d;
+    color: #fff;
+  }
+}

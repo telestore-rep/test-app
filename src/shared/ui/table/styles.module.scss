@@ -1,0 +1,92 @@
+.TableWrap {
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #dbdbdb;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+
+  &Dark {
+    border: 1px solid #787878;
+
+    .Table {
+      background: #3d3d3d;
+    }
+
+    .TableHeader {
+      border-bottom: 1px solid #787878;
+    }
+  }
+}
+
+.Table {
+  border-radius: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  background: #dbdbdb;
+}
+
+.Table {
+  width: 100%;
+
+  &Header {
+    display: flex;
+    border-bottom: 1px solid #dbdbdb;
+    align-items: center;
+    justify-content: space-around;
+    padding-bottom: 5px;
+  }
+}
+
+.TableBody {
+  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #e0e0e0;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #e0e0e0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  &Active {
+    min-height: 380px;
+    max-height: 380px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+.TxItem {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid #dbdbdb;
+
+  &Dark {
+    border-bottom: 1px solid #878787;
+  }
+}
+
+.Link {
+  color: #fff;
+}

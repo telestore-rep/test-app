@@ -1,0 +1,30 @@
+.InfoBlock {
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #dbdbdb;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+
+  &Dark {
+    border: 1px solid #787878;
+  }
+}
+
+.InfoList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+
+  &Item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+  }
+}

@@ -1,0 +1,16 @@
+.error {
+  color: #fff;
+  border-radius: 10px;
+  border: 1px solid red;
+  padding: 10px 10px;
+  background-color: rgb(252 60 68);
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 300px;
+
+  @media screen and (max-width: 414px) {
+    top: 70px;
+    width: 90%;
+  }
+}

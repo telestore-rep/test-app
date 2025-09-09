@@ -1,0 +1,103 @@
+.root {
+  display: flex;
+}
+
+.isColumn {
+  flex-direction: column;
+}
+
+.isWide {
+  width: 100%;
+}
+
+.spaceBetween {
+  justify-content: space-between;
+}
+
+.topLeft {
+  align-items: flex-start;
+}
+
+.isColumn.middleLeft {
+  align-items: flex-start;
+}
+
+.middleLeft {
+  align-items: center;
+}
+
+.isColumn.bottomLeft {
+  align-items: flex-start;
+}
+
+.bottomLeft {
+  align-items: flex-end;
+}
+
+.isColumn.topCenter {
+  align-items: center;
+}
+
+.topCenter {
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}
+
+.isColumn.bottomCenter {
+  align-items: center;
+}
+
+.bottomCenter {
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.isColumn.topRight {
+  align-items: flex-end;
+}
+
+.topRight {
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.isColumn.middleRight {
+  align-items: flex-end;
+}
+
+.middleRight {
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.bottomRight {
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.hasEllipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.hasNoShrink {
+  flex-shrink: 0;
+}
+
+.hasGrow {
+  flex-grow: 1;
+}
+
+.hasWrap {
+  flex-wrap: wrap;
+}
+
+.hasFullHeight {
+  height: 100%;
+}

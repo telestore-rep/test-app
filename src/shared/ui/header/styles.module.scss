@@ -1,0 +1,18 @@
+.Header {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  gap: 20px;
+  justify-content: space-between;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #ffffff;
+
+  &Light {
+    border-bottom: 1px solid #000000;
+  }
+}
+
+.BtnText {
+  display: inline;
+}

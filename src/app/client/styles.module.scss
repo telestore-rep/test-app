@@ -1,0 +1,26 @@
+.CheckText {
+    a {
+        color: #000;
+    }
+}
+
+.GetValueWrap {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.Group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ButtonGroup {
+    gap: 4px;
+    width: 100%;
+    display: grid;
+    justify-items: center;
+}

@@ -1,0 +1,57 @@
+.Label {
+  font-size: 14px;
+
+  &-dark {
+    color: #ffffff;
+  }
+
+  &-light {
+    color: #666;
+  }
+}
+
+.Input {
+  width: 100%;
+  padding: 12px 10px;
+  border-radius: 15px;
+  font-size: 10px;
+  outline: none;
+  text-align: right;
+  transition: all 0.2s ease-in-out;
+
+  &::placeholder {
+    text-align: right;
+  }
+
+  &-dark {
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid #787878;
+
+    &::placeholder {
+      color: #787878;
+    }
+  }
+
+  &-light {
+    background: #fff;
+    color: #000;
+    border: 1px solid #dbdbdb;
+
+    &::placeholder {
+      color: #878787;
+    }
+  }
+}
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.ErrorText {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}

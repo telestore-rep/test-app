@@ -1,0 +1,25 @@
+.Switch {
+  position: relative;
+  width: 35px;
+  height: 18px;
+  border-radius: 10000px;
+  border: 1px solid #3d3d3d;
+  cursor: pointer;
+}
+
+.Switch:after {
+  content: "";
+  height: 100%;
+  aspect-ratio: 1/1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #878787;
+  border-radius: 100%;
+  transition: 0.15s linear;
+}
+
+.Switch[data-active="true"]:after {
+  left: 100%;
+  transform: translateX(-100%);
+}

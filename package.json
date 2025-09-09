@@ -1,0 +1,28 @@
+{
+  "name": "telestore.testapp",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "local": "next dev",
+    "start": "next start",
+    "check": "tsc --noEmit && echo Done.",
+    "DEV": "tsc && next build"
+  },
+  "dependencies": {
+    "@telestore/integration-sdk": "^1.0.26",
+    "classnames": "^2.5.1",
+    "crypto": "1.0.1",
+    "eventsource": "^3.0.1",
+    "next": "15.1.7",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sass": "^1.85.1",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5.5.3"
+  }
+}
