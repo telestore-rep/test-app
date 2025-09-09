@@ -19,7 +19,6 @@ export const Validation: FC<ValidationProps> = () => {
   const [validatedClient, setValidatedClient] = useState<boolean | undefined>(
     undefined
   );
-  console.log("initial check and userEncoded", { userEncoded, check });
 
   const validateOnClientSide = () => {
     console.log("validateOnClientSide", { check, userEncoded });
