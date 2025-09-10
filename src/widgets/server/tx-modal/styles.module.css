@@ -1,0 +1,75 @@
+.Modal {
+    background: #fff;
+    box-sizing: border-box;
+    padding: 30px 20px;
+    border-radius: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 270px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s;
+}
+
+.ModalBody {
+    display: flex;
+    flex-direction: column;
+}
+
+.ModalVisible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.ModalItem {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.ModalTitle {
+    color: #787878;
+    font-family: "Inter";
+    font-size: 12px;
+}
+
+.ModalSubtitle {
+    color: #000;
+    font-size: 12px;
+    font-family: "Inter";
+}
+
+.ModalTitleMain {
+    color: #000;
+    font-size: 17px;
+    font-family: "Inter";
+}
+
+.ModalHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 35px;
+    position: relative;
+}
+
+.Close {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    cursor: pointer;
+    transform: translateY(-50%);
+}
+
+.Btn {
+    max-width: 130px;
+    width: 100%;
+    margin-top: 20px;
+    align-self: center;
+}

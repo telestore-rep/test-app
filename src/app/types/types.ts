@@ -163,6 +163,22 @@ export interface TxCodesOut {
   typeTx?: CodeTypeEnum;
 }
 
+export interface TxCodeInfo {
+  timetick: number,
+  code: string,
+  currency: string,
+  typeTx: number,
+  amount: number,
+  state: string,
+  stateCode: number,
+  dateTxUTC: string;
+  dateCodeUTC: string,
+  isOwner: boolean,
+  externalId: string,
+  partnerInfo: string,
+  tag: string
+}
+
 type CategoryEnum = (typeof CategoryEnum)[keyof typeof CategoryEnum];
 
 const CategoryEnum = {

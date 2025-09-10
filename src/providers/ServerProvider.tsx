@@ -1,7 +1,8 @@
 "use client";
 import { createContext, Dispatch, FC, JSX, memo, PropsWithChildren, SetStateAction, useEffect, useState } from "react";
 import { ITeleuserAuthorizedInfo } from "@/shared/store/useAuthStore";
-import { AppsStoreOut, IBalanceInfo, ITransaction, TxCodesOut } from "@/app/types/types";
+import { AppsStoreOut, IBalanceInfo, ITransaction, TxCodeInfo, TxCodesOut } from "@/app/types/types";
+import { useSearchParams } from "next/navigation";
 
 export interface ServerContextT {
   teleuser: ITeleuserAuthorizedInfo | null;
@@ -11,6 +12,8 @@ export interface ServerContextT {
   balanceInfo: IBalanceInfo | null;
   webhookEvents: string[];
   sseEvents: string[];
+  acqStatus: string | null;
+  codeInfo: TxCodeInfo | null;
   errors: Record<string, string>;
   setTeleuser: Dispatch<SetStateAction<ITeleuserAuthorizedInfo | null>>;
   setBalanceInfo: Dispatch<SetStateAction<IBalanceInfo | null>>;
@@ -27,6 +30,8 @@ export const ServerContext = createContext<ServerContextT>({
   devApps: null,
   transactions: null,
   balanceInfo: null,
+  acqStatus: null,
+  codeInfo: null,
   webhookEvents: [],
   sseEvents: [],
   errors: {},
@@ -46,9 +51,13 @@ export const ServerProvider: FC<PropsWithChildren<unknown>> = memo(({ children }
     const [invoices, setInvoices] = useState<TxCodesOut[] | null>(null);
     const [devApps, setDevApps] = useState<AppsStoreOut[] | null>(null);
     const [authorized, setAuthorized] = useState<boolean>(false);
+    const params = useSearchParams();
     const [errors, setErrorsState] = useState<Record<string, string>>({});
     const [sseEvents, setSseEvents] = useState<string[]>([]);
     const [webhookEvents, setWebhookEvents] = useState<string[]>([]);
+    const telestoreTxCode = params?.get("telestore_code");
+    const telestoreTxStatus = params?.get("telestore_status");
+    const [codeInfo, setCodeInfo] = useState<TxCodeInfo | null>(null)
 
     const setError = (key: string, value: string) => {
         setErrorsState((prev) => ({ ...prev, [key]: value }));
@@ -68,6 +77,9 @@ export const ServerProvider: FC<PropsWithChildren<unknown>> = memo(({ children }
       }
     
       try {
+          const response = await fetch(`./api/get_tx_info?code=${telestoreTxCode}`);
+          const responseData = await response.json();
+          setCodeInfo(responseData.result);
           const userData = await fetchJson("./api/teleuser_detailts");
           const balanceData = await fetchJson("./api/balance_info");
           const transactionsData = await fetchJson("./api/get_transactions");
@@ -80,10 +92,16 @@ export const ServerProvider: FC<PropsWithChildren<unknown>> = memo(({ children }
           setInvoices(invoicesData.result);
           setDevApps(devAppsData.result);
       } catch (error) {
-          setError("Telestore connection error", error.message);
+          setError("Telestore connection error", (error as Error).message);
           console.error("Error:", error);
       }
     };
+
+    useEffect(() => {
+      if (telestoreTxCode) {
+        connectTelestore();
+      }
+    }, [telestoreTxCode]);
 
     useEffect(() => {
       if (authorized) {
@@ -100,7 +118,7 @@ export const ServerProvider: FC<PropsWithChildren<unknown>> = memo(({ children }
             setSseEvents(sseResult);
             setWebhookEvents(webhookResult);
           } catch (error) {
-            setError("Getting events error", error.message);
+            setError("Getting events error", (error as Error).message);
             console.error("Error:", error);
           }
         };
@@ -119,9 +137,11 @@ export const ServerProvider: FC<PropsWithChildren<unknown>> = memo(({ children }
                 teleuser,
                 invoices,
                 sseEvents,
+                codeInfo,
                 webhookEvents,
                 devApps,
                 errors,
+                acqStatus: telestoreTxStatus,
                 transactions,
                 balanceInfo,
                 setBalanceInfo,

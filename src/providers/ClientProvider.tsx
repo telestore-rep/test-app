@@ -36,6 +36,7 @@ export const ClientProvider: FC<PropsWithChildren<unknown>> = memo(
     const params = useSearchParams();
     const userEncoded = params?.get("usr");
     const authCode = params?.get("auth_code");
+    const telestoreTxCode = params?.get("telestore_code");
     const [authorized, setAuthorized] = useState(false);
     const [teleuser, setTeleuser] = useState<ITeleuserInfo | null>(null);
     const [teleuserAuthorized, setTeleuserAuthorized] =
@@ -108,6 +109,17 @@ export const ClientProvider: FC<PropsWithChildren<unknown>> = memo(
           url.searchParams.delete("auth_code");
           window.history.replaceState({}, "", url);
         })();
+      }
+
+      if (telestoreTxCode && window.location.pathname !== '/server') {
+        const currentUrl = new URL(window.location.toString());
+        const serverUrl = new URL('/server', window.location.origin);
+        
+        currentUrl.searchParams.forEach((value, key) => {
+          serverUrl.searchParams.set(key, value);
+        });
+        
+        window.location.href = serverUrl.toString();
       }
     }, []);
 

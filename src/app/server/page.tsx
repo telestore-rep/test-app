@@ -11,13 +11,14 @@ import Link from "next/link";
 import { Table } from "@/shared/ui/table/Table";
 import { InfoCard } from "@/shared/ui/info-card/InfoCard";
 import { Title } from "@/shared/ui/title/Title";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ErrorMessage from "@/shared/ui/errors";
 import ServerButtons from "@/shared/ui/server-buttons/ServerButtons";
 import { ServerContext } from "@/providers/ServerProvider";
 import PaymentSection from "@/widgets/server/payment/PaymentSection";
 import InvoiceSection from "@/widgets/server/invoice/InvoiceSection";
 import { SseInfo } from "@/widgets/server/sse/SseInfo";
+import { TxModal } from "@/widgets/server/tx-modal/TxModal";
 
 const ServerSide = () => {
   const [loading, setLoading] = useState(false);
@@ -29,6 +30,7 @@ const ServerSide = () => {
     invoices,
     devApps,
     webhookEvents,
+    codeInfo,
     errors,
     setError,
     connectTelestore,
@@ -40,6 +42,7 @@ const ServerSide = () => {
 
   return (
     <>
+      {codeInfo && <TxModal />}
       <Header title="Server side" color="dark" btnEvent={navigateClientSide} />
       <AuthInfo
         color="dark"
