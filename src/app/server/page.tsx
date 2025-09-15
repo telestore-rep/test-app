@@ -31,6 +31,7 @@ const ServerSide = () => {
     devApps,
     webhookEvents,
     codeInfo,
+    telestoreTxCode,
     errors,
     setError,
     connectTelestore,
@@ -42,7 +43,7 @@ const ServerSide = () => {
 
   return (
     <>
-      {codeInfo && <TxModal />}
+      {(telestoreTxCode === 'failure' || codeInfo) && <TxModal />}
       <Header title="Server side" color="dark" btnEvent={navigateClientSide} />
       <AuthInfo
         color="dark"

@@ -12,7 +12,7 @@ export interface ServerContextT {
   balanceInfo: IBalanceInfo | null;
   webhookEvents: string[];
   sseEvents: string[];
-  acqStatus: string | null;
+  telestoreTxCode?: string | null;
   codeInfo: TxCodeInfo | null;
   errors: Record<string, string>;
   setTeleuser: Dispatch<SetStateAction<ITeleuserAuthorizedInfo | null>>;
@@ -30,7 +30,7 @@ export const ServerContext = createContext<ServerContextT>({
   devApps: null,
   transactions: null,
   balanceInfo: null,
-  acqStatus: null,
+  telestoreTxCode: null,
   codeInfo: null,
   webhookEvents: [],
   sseEvents: [],
@@ -56,7 +56,6 @@ export const ServerProvider: FC<PropsWithChildren<unknown>> = memo(({ children }
     const [sseEvents, setSseEvents] = useState<string[]>([]);
     const [webhookEvents, setWebhookEvents] = useState<string[]>([]);
     const telestoreTxCode = params?.get("telestore_code");
-    const telestoreTxStatus = params?.get("telestore_status");
     const [codeInfo, setCodeInfo] = useState<TxCodeInfo | null>(null)
 
     const setError = (key: string, value: string) => {
@@ -141,8 +140,8 @@ export const ServerProvider: FC<PropsWithChildren<unknown>> = memo(({ children }
                 webhookEvents,
                 devApps,
                 errors,
-                acqStatus: telestoreTxStatus,
                 transactions,
+                telestoreTxCode,
                 balanceInfo,
                 setBalanceInfo,
                 setTransactions,
