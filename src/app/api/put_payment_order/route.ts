@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
-    const url = "https://dev.tele.store:8081/acquiring/v1/put_payment_order";
+    const url = "https://dev.tele.store:8081/api/v1/payment/put_payment_order";
     const body = await request.json();
     const response = await fetchWithReconnect(url, { method: "POST", body: JSON.stringify(body) });
 
