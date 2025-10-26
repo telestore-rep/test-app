@@ -23,7 +23,7 @@ const InvoiceSection: React.FC<Props> = ({
     amount: "",
     tag: "",
     partner_info: "",
-    currency: "",
+    currency: "TeleUSD",
   });
   const [isPaymentOrder, setInvoiceType] = useState(false);
 
@@ -44,7 +44,7 @@ const InvoiceSection: React.FC<Props> = ({
         app_id: APP_ID.toString(),
         currency: !isPaymentOrder
           ? "TeleUSD"
-          : paymentOrder.currency ?? "TeleUSD",
+          : paymentOrder.currency,
         partner_info: paymentOrder.partner_info || undefined,
         tag: paymentOrder.tag || undefined,
       };
