@@ -8,6 +8,7 @@ export const useValidation = () => {
     amount?: string;
     tag?: string;
     partner_info?: string;
+    currency?: string;
   }>({});
 
   const validateAmount = (value: string) => {
@@ -21,7 +22,7 @@ export const useValidation = () => {
 
   const validateDescription = (
     value: string,
-    field: "tag" | "partner_info"
+    field: "tag" | "partner_info" | "currency"
   ) => {
     if (!descriptionRegex.test(value)) {
       setErrors((prev) => ({

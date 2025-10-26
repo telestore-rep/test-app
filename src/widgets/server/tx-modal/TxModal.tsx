@@ -46,7 +46,7 @@ export const TxModal: FC<TxModalProps> = () => {
                 {telestoreTxCode === "failure" ? (
                     <div className={styles.ModalItem}>
                         <span className={styles.ModalTitle} data-testid="acq-status-title">
-                            Acquiring status:
+                            Payment order status:
                         </span>
                         <span
                             className={styles.ModalSubtitle}
@@ -73,7 +73,7 @@ export const TxModal: FC<TxModalProps> = () => {
                                 className={styles.ModalTitle}
                                 data-testid="acq-status-title"
                             >
-                                Acquiring status:
+                                Payment order status:
                             </span>
                             <span
                                 className={styles.ModalSubtitle}

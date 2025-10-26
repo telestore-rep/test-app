@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Table } from "@/shared/ui/table/Table";
-import TransferBlock from "@/shared/ui/transfer-block/TransferBlock";
+import TransferBlock, { ITransferBlockField } from "@/shared/ui/transfer-block/TransferBlock";
 import { InvoiceParams } from "@telestore/integration-sdk";
 import { API_URL, APP_ID } from "@/shared/constants/client";
 import { TxCodesOut } from "@/app/types/types";
@@ -19,34 +19,37 @@ const InvoiceSection: React.FC<Props> = ({
   setError,
   refresh,
 }) => {
-  const [isAcquiringInvoice, setIsAcquiringInvoice] = useState({
+  const [paymentOrder, setPaymentOrder] = useState({
     amount: "",
     tag: "",
     partner_info: "",
+    currency: "",
   });
-  const [invoiceType, setInvoiceType] = useState(false);
+  const [isPaymentOrder, setInvoiceType] = useState(false);
 
   const { setInvoices } = useContext(ServerContext);
 
   const updateInvoiceState = (
-    key: keyof typeof isAcquiringInvoice,
+    key: keyof typeof paymentOrder,
     value: string
   ) => {
-    setIsAcquiringInvoice((prevState) => ({ ...prevState, [key]: value }));
+    setPaymentOrder((prevState) => ({ ...prevState, [key]: value }));
   };
 
   const handleGenerateInvoice = async () => {
     if (loading) return;
     try {
       const body: InvoiceParams = {
-        amount: +isAcquiringInvoice.amount,
+        amount: +paymentOrder.amount,
         app_id: APP_ID.toString(),
-        currency: "TeleUSD",
-        partner_info: isAcquiringInvoice.partner_info || undefined,
-        tag: isAcquiringInvoice.tag || undefined,
+        currency: !isPaymentOrder
+          ? "TeleUSD"
+          : paymentOrder.currency ?? "TeleUSD",
+        partner_info: paymentOrder.partner_info || undefined,
+        tag: paymentOrder.tag || undefined,
       };
 
-      const endpoint = invoiceType
+      const endpoint = isPaymentOrder
         ? "./api/put_payment_order"
         : "./api/create_invoice";
 
@@ -71,19 +74,28 @@ const InvoiceSection: React.FC<Props> = ({
         testId={"CREATE_INVOICE"}
         id={"INVOICE_BLOCK"}
         setState={updateInvoiceState}
-        state={isAcquiringInvoice}
+        state={paymentOrder}
         transferFn={handleGenerateInvoice}
-        invoiceType={invoiceType}
+        invoiceType={isPaymentOrder}
         setInvoiceType={setInvoiceType}
         loading={loading}
         title="Create invoice"
         titleBtn="Create invoice"
         fields={[
           {
-            label: "Amount, TeleUsd",
+            label: isPaymentOrder ? "Amount" : "Amount, TeleUsd",
             placeholder: "enter amount",
             id: "amount",
           },
+          ...(!isPaymentOrder ? [] : [{
+            label: "Currency",
+            id: "currency",
+            type: "select",
+            items: [
+              { label: "TeleUSD", value: "TeleUSD" },
+              { label: "Rub", value: "RUB" },
+            ],
+          } as ITransferBlockField]),
           {
             label: "Partner Info",
             placeholder: "enter partner info",
@@ -100,7 +112,7 @@ const InvoiceSection: React.FC<Props> = ({
             ? invoices?.map((i) => ({
               Code: i.code,
               Amount: i.amount,
-              Link: `${API_URL}/redirect.html?${i.typeTx === 24 ? "pay_code" : "invoice" }=${i.code}`,
+              Link: `${API_URL}/redirect.html?${i.typeTx === 24 ? "pay_code" : "invoice"}=${i.code}`,
             }))
             : undefined
         }

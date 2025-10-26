@@ -13,6 +13,15 @@ interface State {
   id?: string | null;
   tag: string;
   partner_info?: string;
+  currency?: string;
+}
+
+export interface ITransferBlockField {
+  label: string;
+  placeholder?: string; // для select можно показать placeholder как disabled option
+  id: keyof State;
+  type?: "text" | "select"; // NEW (default: "text")
+  items?: { label: string; value: string }[]; // NEW: варианты для select
 }
 
 interface ITransferBlock {
@@ -20,7 +29,7 @@ interface ITransferBlock {
   loading?: boolean;
   title: string;
   titleBtn: string;
-  fields: { label: string; placeholder: string; id: keyof State }[];
+  fields: ITransferBlockField[];
   color?: TextColor;
   transferFn: () => void;
   state: State;
@@ -53,6 +62,7 @@ export const TransferBlock = ({
 }: ITransferBlock) => {
   const { validateAmount, validateDescription, errors } = useValidation();
   const toggleSwitch = () => setInvoiceType?.(!invoiceType);
+  const [isSelectOpen, setSelectOpen] = useState(false);
 
   const getFieldInfo = (fieldId: keyof State): FieldsType => {
     if (fieldId === "tag") {
@@ -77,6 +87,14 @@ export const TransferBlock = ({
         (value: string) => setState("partner_info", value),
         (value: string) => validateDescription(value, "partner_info"),
         errors.partner_info,
+      ];
+    }
+    if (fieldId === "currency") {
+      return [
+        state?.currency as any,
+        (value: string) => setState("currency", value),
+        (value: string) => validateDescription(value, "currency"),
+        errors.currency,
       ];
     }
     return [
@@ -119,7 +137,7 @@ export const TransferBlock = ({
                 weight="medium"
                 color={invoiceType ? "dark" : "grey"}
               >
-                Acquiring invoice
+                Payment order
               </Text>
             </div>
           </>
@@ -129,6 +147,14 @@ export const TransferBlock = ({
       <div className={styles.CreateCardContainer}>
         {fields.map((field, index) => {
           const [value, setValue, validate, error] = getFieldInfo(field.id);
+          const isSelect = field.type === "select";
+          const currentValue =
+            value && value.length > 0
+              ? value
+              : field.items && field.items.length > 0
+                ? field.items[0].value // значение по умолчанию
+                : "";
+
           return (
             <Layout align="middle-left" isWide key={index}>
               <Layout align="top-left" isWide>
@@ -136,21 +162,66 @@ export const TransferBlock = ({
                   {field.label}
                 </Text>
               </Layout>
+
               <Layout align="top-left" isWide>
-                <Input
-                  testid={`${id}_${index}`}
-                  value={value ?? ""}
-                  setValue={setValue}
-                  validate={validate}
-                  error={error}
-                  placeholder={field.placeholder}
-                  color={color}
-                />
+                {isSelect ? (
+                  <div className={styles.SelectWrapper}>
+                    <select
+                      data-testid={`${id}_${index}_select`}
+                      className={cn(styles.Select, styles[`Select-${color}`], {
+                        [styles.SelectOpen]: isSelectOpen,
+                      })}
+                      value={currentValue}
+                      onChange={(e) => {
+                        setValue(e.target.value);
+                        setSelectOpen(false); // закрываем после выбора
+                      }}
+                      onBlur={() => setSelectOpen(false)} // клик вне — закрыть
+                      onMouseDown={() => setSelectOpen(true)} // перед открытием
+                      onClick={() => {
+                        // Если пользователь кликнул по select повторно, некоторые браузеры
+                        // закроют список без change — зафиксируем закрытие в конце очереди.
+                        queueMicrotask(() => setSelectOpen(false));
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Escape" || e.key === "Enter" || e.key === "Tab") {
+                          setSelectOpen(false);
+                        }
+                        if (e.altKey && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
+                          setSelectOpen(true);
+                        }
+                      }}
+                    >
+                      {(field.items ?? []).map((opt) => (
+                        <option key={opt.value} value={opt.value}>
+                          {opt.label}
+                        </option>
+                      ))}
+                    </select>
+
+                    <span
+                      className={cn(styles.SelectArrow, styles[`SelectArrow-${color}`], {
+                        [styles.SelectArrowOpen]: isSelectOpen,
+                      })}
+                    />
+                  </div>
+                ) : (
+                  <Input
+                    testid={`${id}_${index}`}
+                    value={value ?? ""}
+                    setValue={setValue}
+                    validate={validate}
+                    error={error}
+                    placeholder={field.placeholder}
+                    color={color}
+                  />
+                )}
               </Layout>
             </Layout>
           );
         })}
       </div>
+
       <Button
         isLoading={loading}
         size="md"
