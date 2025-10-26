@@ -51,7 +51,7 @@ const TransactionItem: React.FC<TransactionProps> = ({
             ) : Array.isArray(value) ? (
               value.join(", ")
             ) : (
-              String(value) + (isAmount ? " USDT" : "")
+              String(value)
             )}
             {!isLast && " /"}
           </Text>
