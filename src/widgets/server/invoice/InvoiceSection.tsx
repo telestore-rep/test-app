@@ -111,7 +111,7 @@ const InvoiceSection: React.FC<Props> = ({
           invoices
             ? invoices?.map((i) => ({
               Code: i.code,
-              Amount: i.amount,
+              Amount: `${i.amount} ${i.currency}`,
               Link: i.typeTx === 24 ? `${API_URL}/pay?code=${i.code}` : `${API_URL}/redirect.html?invoice=${i.code}`,
             }))
             : undefined
