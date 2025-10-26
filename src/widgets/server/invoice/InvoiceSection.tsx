@@ -23,7 +23,7 @@ const InvoiceSection: React.FC<Props> = ({
     amount: "",
     tag: "",
     partner_info: "",
-    currency: "TeleUSD",
+    currency: "",
   });
   const [isPaymentOrder, setInvoiceType] = useState(false);
 
@@ -83,7 +83,7 @@ const InvoiceSection: React.FC<Props> = ({
         titleBtn="Create invoice"
         fields={[
           {
-            label: isPaymentOrder ? "Amount" : "Amount, TeleUsd",
+            label: "Amount",
             placeholder: "enter amount",
             id: "amount",
           },
@@ -92,8 +92,8 @@ const InvoiceSection: React.FC<Props> = ({
             id: "currency",
             type: "select",
             items: [
-              { label: "TeleUSD", value: "TeleUSD" },
-              { label: "Rub", value: "RUB" },
+              { label: "TeleUSD (TeleDollar)", value: "TeleUSD" },
+              { label: "Rub (Russian Ruble)", value: "RUB" },
             ],
           } as ITransferBlockField]),
           {

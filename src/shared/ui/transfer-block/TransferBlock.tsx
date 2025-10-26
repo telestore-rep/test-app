@@ -156,66 +156,70 @@ export const TransferBlock = ({
                 : "";
 
           return (
-            <Layout align="middle-left" isWide key={index}>
+            <Layout align="top-center" isWide key={index}>
               <Layout align="top-left" isWide>
-                <Text weight="regular" size={12} color={color}>
+                <Text weight="regular" className={styles.Title} size={12} color={color}>
                   {field.label}
                 </Text>
               </Layout>
 
               <Layout align="top-left" isWide>
-                {isSelect ? (
-                  <div className={styles.SelectWrapper}>
-                    <select
-                      data-testid={`${id}_${index}_select`}
-                      className={cn(styles.Select, styles[`Select-${color}`], {
-                        [styles.SelectOpen]: isSelectOpen,
-                      })}
-                      value={currentValue}
-                      onChange={(e) => {
-                        setValue(e.target.value);
-                        setSelectOpen(false); // закрываем после выбора
-                      }}
-                      onBlur={() => setSelectOpen(false)} // клик вне — закрыть
-                      onMouseDown={() => setSelectOpen(true)} // перед открытием
-                      onClick={() => {
-                        // Если пользователь кликнул по select повторно, некоторые браузеры
-                        // закроют список без change — зафиксируем закрытие в конце очереди.
-                        queueMicrotask(() => setSelectOpen(false));
-                      }}
-                      onKeyDown={(e) => {
-                        if (e.key === "Escape" || e.key === "Enter" || e.key === "Tab") {
-                          setSelectOpen(false);
-                        }
-                        if (e.altKey && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
-                          setSelectOpen(true);
-                        }
-                      }}
-                    >
-                      {(field.items ?? []).map((opt) => (
-                        <option key={opt.value} value={opt.value}>
-                          {opt.label}
-                        </option>
-                      ))}
-                    </select>
-
+              {isSelect ? (
+                <div className={styles.SelectWrapper}>
+                  <div
+                    className={cn(styles.SelectInput, styles[`SelectInput-${color}`], {
+                      [styles.SelectInputOpen]: isSelectOpen,
+                    })}
+                    onClick={() => setSelectOpen(!isSelectOpen)}
+                  >
+                    <span>
+                      {
+                        field.items?.find((opt) => opt.value === value)?.label ||
+                        field.placeholder ||
+                        'Select currency'
+                      }
+                    </span>
                     <span
-                      className={cn(styles.SelectArrow, styles[`SelectArrow-${color}`], {
+                      className={cn(styles.SelectArrow, {
                         [styles.SelectArrowOpen]: isSelectOpen,
                       })}
-                    />
+                    >{">"}</span>
                   </div>
-                ) : (
-                  <Input
-                    testid={`${id}_${index}`}
-                    value={value ?? ""}
-                    setValue={setValue}
-                    validate={validate}
-                    error={error}
-                    placeholder={field.placeholder}
-                    color={color}
-                  />
-                )}
+
+                  <div
+                    className={cn(styles.SelectDropdownContainer, {
+                      [styles.SelectDropdownContainerOpen]: isSelectOpen,
+                    })}
+                  >
+                    <div className={cn(styles.SelectDropdown)}>
+                      {(field.items ?? []).map((opt) => (
+                        <div
+                          key={opt.value}
+                          className={cn(styles.SelectOption, {
+                            [styles.SelectOptionActive]: opt.value === value,
+                          })}
+                          onClick={() => {
+                            setValue(opt.value);
+                            setSelectOpen(false);
+                          }}
+                        >
+                          {opt.label}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <Input
+                  testid={`${id}_${index}`}
+                  value={value ?? ''}
+                  setValue={setValue}
+                  validate={validate}
+                  error={error}
+                  placeholder={field.placeholder}
+                  color={color}
+                />
+              )}
               </Layout>
             </Layout>
           );

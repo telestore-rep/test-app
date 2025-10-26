@@ -35,72 +35,109 @@
   gap: 10px;
   align-items: center;
 }
-
 .SelectWrapper {
-  position: relative;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.Select {
-  width: 100%;
-  padding: 12px 28px 12px 10px;
-  border-radius: 15px;
+.SelectInput > span {
   font-size: 10px;
-  outline: none;
-  text-align: right;
-  transition: all 0.2s ease-in-out;
-  appearance: none;
+  color: #787878;
+}
+
+.SelectInput {
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  font-size: 12px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+  font-family: "Inter";
+  border: 1px solid #dbdbdb;
 
   &-dark {
     background: #000;
     color: #fff;
     border: 1px solid #787878;
-
-    option {
-      background: #000;
-      color: #fff;
-    }
   }
 
   &-light {
     background: #fff;
     color: #000;
     border: 1px solid #dbdbdb;
-
-    option {
-      background: #fff;
-      color: #000;
-    }
   }
 
-  &:focus {
+  &Open {
     border-color: #888;
   }
 }
 
 .SelectArrow {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  width: 0;
-  height: 0;
-  pointer-events: none;
-  transform: translateY(-50%);
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 6px solid #000; // ▼
-  transition: transform 0.2s ease-in-out;
+  font-family: "Inter";
+  transform: rotate(90deg);
+  font-size: 14px !important;
+  color: #fff !important;
+
+  &Open {
+    transform: rotate(-90deg);
+  }
+}
+
+/* Контейнер, который занимает место */
+.SelectDropdownContainer {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.25s ease;
+}
+
+.SelectDropdownContainerOpen {
+  max-height: 200px;
+  opacity: 1;
+}
+
+.SelectDropdown {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
+  margin-top: 4px;
 
   &-dark {
-    border-top-color: #fff;
+    background: #000;
+    border: 1px solid #787878;
   }
 
   &-light {
-    border-top-color: #000;
+    background: #fff;
+    border: 1px solid #dbdbdb;
   }
+}
 
-  &.SelectArrowOpen {
-    transform: translateY(-50%) rotate(180deg); // ▲
+.SelectOption {
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  color: #787878;
+  font-family: "Inter";
+  text-align: end;
+  transition: background 0.2s;
+  border: 1px solid #787878;
+  border-radius: 12px;
+  margin-bottom: 5px;
+  font-size: 10px;
+
+  &:last-child {
+    margin-bottom: 0;
   }
+}
+
+.Title {
+  margin-top: 10px;
 }
