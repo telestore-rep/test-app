@@ -167,6 +167,7 @@ export const TransferBlock = ({
               {isSelect ? (
                 <div className={styles.SelectWrapper}>
                   <div
+                    data-testid={`${id}_${index}`}
                     className={cn(styles.SelectInput, styles[`SelectInput-${color}`], {
                       [styles.SelectInputOpen]: isSelectOpen,
                     })}
@@ -194,6 +195,7 @@ export const TransferBlock = ({
                     <div className={cn(styles.SelectDropdown)}>
                       {(field.items ?? []).map((opt) => (
                         <div
+                          data-testid={`${id}_${opt.value}`}
                           key={opt.value}
                           className={cn(styles.SelectOption, {
                             [styles.SelectOptionActive]: opt.value === value,
