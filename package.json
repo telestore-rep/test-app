@@ -9,7 +9,7 @@
     "DEV": "tsc && next build"
   },
   "dependencies": {
-    "@telestore/integration-sdk": "^1.0.26",
+    "@telestore/integration-sdk": "^1.0.27",
     "classnames": "^2.5.1",
     "crypto": "1.0.1",
     "eventsource": "^3.0.1",

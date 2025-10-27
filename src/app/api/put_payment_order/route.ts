@@ -1,19 +1,18 @@
 "use server";
-import { fetchWithReconnect } from '@/shared/lib/fetchWithReconnect';
 import { NextRequest, NextResponse } from 'next/server';
+import { teleStoreClient } from '@/shared/lib/telestoreClient';
 
 export async function POST(request: NextRequest) {
   try {
-    const url = "https://dev.tele.store:8081/api/v1/payment/put_payment_order";
     const body = await request.json();
-    const response = await fetchWithReconnect(url, { method: "POST", body: JSON.stringify(body) });
+    const response = await teleStoreClient.CreatePaymentOrder(body);
 
-    if (response.status !== 200) {
-      console.error("Telestore API error:", response.status);
-      return NextResponse.json(await response.json(), { status: 500 });
+    if (response.error) {
+      console.error("Telestore API error:", response.error);
+      return NextResponse.json(response.error, { status: 500 });
     }
 
-    return NextResponse.json((await response.json()).result, { status: 200 });
+    return NextResponse.json(response.result, { status: 200 });
   } catch (error) {
     console.error("An error occurred:", error);
     return NextResponse.json(

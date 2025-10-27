@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Table } from "@/shared/ui/table/Table";
 import TransferBlock, { ITransferBlockField } from "@/shared/ui/transfer-block/TransferBlock";
-import { InvoiceParams } from "@telestore/integration-sdk";
+import { OrderParams } from "@telestore/integration-sdk";
 import { API_URL, APP_ID } from "@/shared/constants/client";
 import { TxCodesOut } from "@/app/types/types";
 import { ServerContext } from "@/providers/ServerProvider";
@@ -39,7 +39,7 @@ const InvoiceSection: React.FC<Props> = ({
   const handleGenerateInvoice = async () => {
     if (loading) return;
     try {
-      const body: InvoiceParams = {
+      const body: OrderParams = {
         amount: +paymentOrder.amount,
         app_id: APP_ID.toString(),
         currency: !isPaymentOrder
