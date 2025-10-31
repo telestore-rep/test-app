@@ -41,7 +41,7 @@ const InvoiceSection: React.FC<Props> = ({
     try {
       const body: OrderParams = {
         amount: +paymentOrder.amount,
-        app_id: APP_ID.toString(),
+        app_id: APP_ID,
         currency: !isPaymentOrder
           ? "TeleUSD"
           : paymentOrder.currency,
