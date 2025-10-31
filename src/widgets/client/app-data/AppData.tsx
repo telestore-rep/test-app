@@ -1,4 +1,5 @@
 import { FetchResponse, IAppData } from "@/app/types/types";
+import { getBaseUrl } from "@/shared/constants/client";
 import { AppData } from "@/shared/ui/app-data/AppData";
 import { FC, useState } from "react";
 
@@ -9,7 +10,7 @@ export const ListApp: FC<ListAppProps> = () => {
 
   const onLoadData = async () => {
     const response = await fetch(
-      `https://dev.tele.store:8081/appauth/v1/list_app_user_data`,
+      `${getBaseUrl()}/appauth/v1/list_app_user_data`,
       {
         credentials: "include",
         method: "GET",

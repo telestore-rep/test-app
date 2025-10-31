@@ -14,6 +14,7 @@ import {
 } from "@/shared/store/useAuthStore";
 import { setDeviceGuidCookie } from "@/shared/helpers/setDeviceGuidCookie";
 import { FetchResponse } from "@/app/types/types";
+import { getBaseUrl } from "@/shared/constants/client";
 
 export interface ClientContextT {
   teleuser: ITeleuserInfo | null;
@@ -25,9 +26,9 @@ export interface ClientContextT {
 
 export const ClientContext = createContext<ClientContextT>({
   teleuser: null,
-  authorizeUser: async () => {},
+  authorizeUser: async () => { },
   authorized: false,
-  getTeleuserDetails: async () => {},
+  getTeleuserDetails: async () => { },
   teleuserAuthorized: null,
 });
 
@@ -36,6 +37,7 @@ export const ClientProvider: FC<PropsWithChildren<unknown>> = memo(
     const params = useSearchParams();
     const userEncoded = params?.get("usr");
     const authCode = params?.get("auth_code");
+    const proxyId = params?.get("proxy_id");
     const telestoreTxCode = params?.get("telestore_code");
     const [authorized, setAuthorized] = useState(false);
     const [teleuser, setTeleuser] = useState<ITeleuserInfo | null>(null);
@@ -44,7 +46,7 @@ export const ClientProvider: FC<PropsWithChildren<unknown>> = memo(
 
     const getTeleuserDetails = async () => {
       const response = await fetch(
-        `https://dev.tele.store:8081/appauth/v1/get_teleuser_details`,
+        `${getBaseUrl()}/appauth/v1/get_teleuser_details`,
         {
           credentials: "include",
           method: "GET",
@@ -67,7 +69,7 @@ export const ClientProvider: FC<PropsWithChildren<unknown>> = memo(
       const body = { session_code: code };
 
       const response = await fetch(
-        "https://dev.tele.store:8081/auth/v1/app_login",
+        `${getBaseUrl()}/auth/v1/app_login`,
         {
           method: "POST",
           body: JSON.stringify(body),
@@ -94,6 +96,10 @@ export const ClientProvider: FC<PropsWithChildren<unknown>> = memo(
     };
 
     useEffect(() => {
+      if (proxyId) {
+        localStorage.setItem("proxy_id", proxyId);
+      }
+
       if (userEncoded) {
         let userData: ITeleuserInfo = JSON.parse(atob(userEncoded));
         userData = { ...userData, validated: false };
@@ -114,11 +120,11 @@ export const ClientProvider: FC<PropsWithChildren<unknown>> = memo(
       if (telestoreTxCode && window.location.pathname !== '/server') {
         const currentUrl = new URL(window.location.toString());
         const serverUrl = new URL('/server', window.location.origin);
-        
+
         currentUrl.searchParams.forEach((value, key) => {
           serverUrl.searchParams.set(key, value);
         });
-        
+
         window.location.href = serverUrl.toString();
       }
     }, []);

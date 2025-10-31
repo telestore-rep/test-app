@@ -6,6 +6,7 @@ import TransferBlock from "@/shared/ui/transfer-block/TransferBlock";
 import Link from "next/link";
 import { FC, useState } from "react";
 import styles from "./styles.module.scss";
+import { getBaseUrl } from "@/shared/constants/client";
 
 interface IBalance {
   amount: number;
@@ -32,7 +33,7 @@ export const Transfer: FC<TransferProps> = () => {
 
   const getBalance = async () => {
     const response = await fetch(
-      `https://dev.tele.store:8081/appauth/v1/get_balance`,
+      `${getBaseUrl()}/appauth/v1/get_balance`,
       {
         credentials: "include",
         method: "GET",
@@ -57,7 +58,7 @@ export const Transfer: FC<TransferProps> = () => {
       paymentState.partner_info.length
     ) {
       const response = await fetch(
-        `https://dev.tele.store:8081/appauth/v1/make_payment`,
+        `${getBaseUrl()}/appauth/v1/make_payment`,
         {
           credentials: "include",
           method: "POST",
