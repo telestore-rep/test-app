@@ -42,25 +42,27 @@ const InvoiceSection: React.FC<Props> = ({
       const body: OrderParams = {
         amount: +paymentOrder.amount,
         app_id: APP_ID,
-        currency: !isPaymentOrder
-          ? "TeleUSD"
-          : paymentOrder.currency,
+        currency: !isPaymentOrder ? "TeleUSD" : paymentOrder.currency,
         partner_info: paymentOrder.partner_info || undefined,
         tag: paymentOrder.tag || undefined,
       };
-
+  
       const endpoint = isPaymentOrder
         ? "./api/put_payment_order"
         : "./api/create_invoice";
-
+  
       const res = await fetch(endpoint, {
         method: "POST",
         body: JSON.stringify(body),
         headers: { "Content-Type": "application/json" },
       });
-
+  
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err?.message || `Request failed with status ${res.status}`);
+      }
+  
       const newInvoice = await res.json();
-
       setInvoices?.((prev) => (prev ? [newInvoice, ...prev] : [newInvoice]));
     } catch (error: any) {
       setError("Invoice creating error", error.message);
