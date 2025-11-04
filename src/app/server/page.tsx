@@ -173,7 +173,7 @@ const ServerSide = () => {
         setError={setError}
         refresh={connectTelestore}
       />
-      <ErrorMessage errors={errors} />
+      <ErrorMessage errors={errors} onRemove={(key) => setError(key, "")} />
     </>
   );
 };

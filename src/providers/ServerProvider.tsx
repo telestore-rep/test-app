@@ -59,7 +59,13 @@ export const ServerProvider: FC<PropsWithChildren<unknown>> = memo(({ children }
     const [codeInfo, setCodeInfo] = useState<TxCodeInfo | null>(null)
 
     const setError = (key: string, value: string) => {
-        setErrorsState((prev) => ({ ...prev, [key]: value }));
+      setErrorsState((prev) => {
+        if (value === "" || value === null) {
+          const { [key]: _, ...rest } = prev;
+          return rest;
+        }
+        return { ...prev, [key]: value };
+      });
     };
 
     const fetchJson = async (url: string) => {
@@ -67,7 +73,7 @@ export const ServerProvider: FC<PropsWithChildren<unknown>> = memo(({ children }
         if (!res.ok) throw new Error(`Error ${url}`);
         return res.json();
     };
-
+    
     const connectTelestore = async () => {
       if (!authorized) {
           const result = await fetch("./api/sdk_connect");

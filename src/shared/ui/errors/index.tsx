@@ -3,14 +3,21 @@ import styles from "./styles.module.scss";
 
 interface IErrorMessage {
   errors: Record<string, string>;
+  onRemove?: (key: string) => void;
 }
 
-const ErrorMessage: FC<IErrorMessage> = ({ errors }) => (
+const ErrorMessage: FC<IErrorMessage> = ({ errors, onRemove }) => (
   <>
-    {Object.entries(errors).map((error) => {
-      const [key, value] = error;
-      return <span className={styles.error}>{`${key}: ${value}`}</span>;
-    })}
+    {Object.entries(errors).map(([key, value]) => (
+      <span
+        key={key}
+        className={styles.error}
+        onClick={() => onRemove?.(key)}
+        style={{ cursor: "pointer" }}
+      >
+        {`${key}: ${value}`}
+      </span>
+    ))}
   </>
 );
 
