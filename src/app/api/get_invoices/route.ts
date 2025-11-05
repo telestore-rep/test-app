@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
   try {
-    const url = "https://dev.tele.store:8081/trex/v1/list_tx_codes?currency=TeleUSD";
+    const url = "https://dev.tele.store:8081/trex/v1/list_tx_codes";
     const response = await fetchWithReconnect(url, { method: "GET" });
 
     if (!response.ok) {
