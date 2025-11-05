@@ -99,11 +99,11 @@ const InvoiceSection: React.FC<Props> = ({
             ],
           } as ITransferBlockField]),
           {
-            label: "Partner Info",
-            placeholder: "enter partner info",
+            label: "Client info",
+            placeholder: "Enter email",
             id: "partner_info",
           },
-          { label: "Tag", placeholder: "enter tag", id: "tag" },
+          { label: "Payment info", placeholder: "Enter Payment info", id: "tag" },
         ]}
         color="dark"
       />

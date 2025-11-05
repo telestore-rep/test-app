@@ -137,7 +137,7 @@ export const TransferBlock = ({
                 weight="medium"
                 color={invoiceType ? "dark" : "grey"}
               >
-                Payment order
+                External invoice
               </Text>
             </div>
           </>
