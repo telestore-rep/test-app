@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
   try {
-    const url = "https://dev.tele.store:8081/trex/v1/list_tx_codes";
+    const url = "https://dev.tele.store:8081/trex/v1/list_tx_codes?isOwner=true";
     const response = await fetchWithReconnect(url, { method: "GET" });
 
     if (!response.ok) {
