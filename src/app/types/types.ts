@@ -105,13 +105,14 @@ export interface ITransaction {
   address_tx_data?: AddressTxData;
   amount?: string | null;
   balance?: number;
+  can_cancel?: boolean | null;
   currency?: string | null;
   datetime?: string;
-  update_datetime?: string;
-  external_id?: string;
+  external_id?: string | null;
   fee?: string | null;
-  group?: string;
+  group?: string | null;
   id_transaction?: string | null;
+  id_update?: string | null;
   is_income?: boolean;
   next_key?: string | null;
   partner_info?: string | null;
@@ -121,6 +122,7 @@ export interface ITransaction {
   tag?: string | null;
   tx_type?: TransactTypeEnum;
   tx_type_text?: string | null;
+  update_datetime?: string;
 }
 
 type CodeTypeEnum = (typeof CodeTypeEnum)[keyof typeof CodeTypeEnum];

@@ -144,7 +144,7 @@ PARAMS {
     currencies=[TeleUSD],
     start="2022-05-10" // Start date (without time) UTC, defaults to 90 days before end if not set
     end="2022-05-10" // End date (without time) UTC, defaults to current date if not set
-    next_key=123 // Last identifier for lazy loading
+    end_tick=123 // Last identifier for lazy loading
     tx_types=[] // Operation type filter
     limit=10 // Number of transactions in the sample, min - 10, max - 100
 }
