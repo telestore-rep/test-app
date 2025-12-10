@@ -5,9 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-
-    webhookStorage.Add(JSON.stringify(body));
+    webhookStorage.Add(await request.text());
     
     return NextResponse.json("", { status: 200 });
   } catch (error) {
