@@ -1,5 +1,5 @@
 import { ClientContext } from "@/providers/ClientProvider";
-import { APP_URL_ID } from "@/shared/constants/client";
+import { APP_ID } from "@/shared/constants/client";
 import Button from "@/shared/ui/button/Button";
 import { InfoBlock } from "@/shared/ui/info-block/InfoBlock";
 import { Title } from "@/shared/ui/title/Title";
@@ -12,7 +12,7 @@ export const ClientUserInfo: FC<ClientUserInfoProps> = () => {
 
   const getData = () => {
     window.open(
-      `https://dev.tele.store:8081/appauth.html?get_user_info=${APP_URL_ID}`,
+      `https://dev.tele.store:8081/appauth.html?get_user_info=${APP_ID}`,
       "_self"
     );
   };

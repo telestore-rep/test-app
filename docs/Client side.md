@@ -22,11 +22,11 @@ On the client side of the application, you can obtain user information from para
 To retrieve user information, redirect the user to the following TeleStore URL:
 
 ```
-https://web.tele.store/appauth.html?get_user_info=${APP_URL_ID}
+https://web.tele.store/appauth.html?get_user_info=${APP_ID}
 ```
 
 Where:
-- `APP_URL_ID` is the URL identifier of your application registered in TeleStore (Profile -> Security -> App URL's).
+- `APP_ID` is the URL identifier of your application registered in TeleStore (Profile -> Security -> App URL's).
 
 [User Redirection Example](../src/app/client/page.tsx#L152)
 
@@ -106,11 +106,11 @@ If your application does not have a server-side, you can authorize your user via
 You can authorize the user by redirecting to the following URL:
 
 ```
-https://web.tele.store/appauth.html?auth_app=${APP_URL_ID}
+https://web.tele.store/appauth.html?auth_app=${APP_ID}
 ```
 
 Where:
-- `APP_URL_ID` is the URL identifier of your application registered in TeleStore (Profile -> Security -> App URL's).
+- `APP_ID` is the URL identifier of your application registered in TeleStore (Profile -> Security -> App URL's).
 
 After successful authorization, the user is redirected to the following URL:
 
@@ -127,11 +127,11 @@ Subsequently, the `auth_code` can be used to create a new session.
 You can authorize the user by opening a URL inside a Popup window:
 
 ```
-https://web.tele.store/appauth.html?auth_app=${APP_URL_ID}&popup=true
+https://web.tele.store/appauth.html?auth_app=${APP_ID}&popup=true
 ```
 
 Where:
-- `APP_URL_ID` is the URL identifier of your application registered in TeleStore (Profile -> Security -> App URL's).
+- `APP_ID` is the URL identifier of your application registered in TeleStore (Profile -> Security -> App URL's).
 - `popup=true` is a required parameter for successful authentication.
 
 [Popup Authentication Example](../src/app/client/page.tsx#L207)

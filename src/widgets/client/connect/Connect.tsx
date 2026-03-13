@@ -1,5 +1,5 @@
 import { ClientContext } from "@/providers/ClientProvider";
-import { APP_URL_ID } from "@/shared/constants/client";
+import { APP_ID } from "@/shared/constants/client";
 import Button from "@/shared/ui/button/Button";
 import Text from "@/shared/ui/text/Text";
 import { Title } from "@/shared/ui/title/Title";
@@ -15,7 +15,7 @@ export const Connect: FC<ConnectProps> = () => {
 
   const connectViaRedirect = () => {
     window.open(
-      `https://dev.tele.store:8081/appauth.html?auth_app=${APP_URL_ID}`,
+      `https://dev.tele.store:8081/appauth.html?auth_app=${APP_ID}`,
       "_self"
     );
   };
@@ -25,7 +25,7 @@ export const Connect: FC<ConnectProps> = () => {
     const height = 850;
 
     window.open(
-      `https://dev.tele.store:8081/appauth.html?auth_app=${APP_URL_ID}&popup=true`,
+      `https://dev.tele.store:8081/appauth.html?auth_app=${APP_ID}&popup=true`,
       "authPopup",
       `width=${width},height=${height}`
     );

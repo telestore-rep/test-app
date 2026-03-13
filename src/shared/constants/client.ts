@@ -1,8 +1,7 @@
 "use client";
 
 export const API_URL: string = "https://dev.tele.store:8081";
-export const APP_URL_ID: string = "1758874298367440011";
-export const APP_ID: string = "1739197350166203";
+export const APP_ID: string = "1768301952636610010";
 export const PUBLIC_USER_KEY: string = "x_FtUrhBftWeZmAKhj4RFssYm2qL2fGySbD_JpgF-_c";
 
 export function getBaseUrl(): string {
